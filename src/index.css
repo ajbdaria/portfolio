@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-bg-light: #f9fafb;
+    --color-bg-dark: #0f172a;
+    --color-text-light: #1e293b;
+    --color-text-dark: #f1f5f9;
+    --color-primary: #6366f1;
+    --color-primary-hover: #4f46e5;
+    --gradient-primary: linear-gradient(90deg, #06b6d4, #6366f1);
+  }
+
+  body {
+    @apply bg-[var(--color-bg-light)] text-[var(--color-text-light)]
+           transition-colors duration-300 ease-out;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  h1, h2, h3 {
+    @apply font-bold tracking-tight;
+  }
+
+  h1 { @apply text-5xl md:text-6xl; }
+  h2 { @apply text-3xl md:text-4xl; }
+  p  { @apply text-lg leading-relaxed; }
+}
