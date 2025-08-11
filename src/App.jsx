@@ -1,6 +1,63 @@
-import React from 'react';
+import React, { useCallback } from "react";
+import Particles from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+
+// -------------------------
+// BitsBackground component
+// -------------------------
+const BitsBackground = () => {
+  const particlesInit = useCallback(async (engine) => {
+    // loadSlim gives us a lightweight bundle (better perf)
+    await loadSlim(engine);
+  }, []);
+
+  const options = {
+    fpsLimit: 60,
+    fullScreen: { enable: true, zIndex: -1 },
+    detectRetina: true,
+    particles: {
+      number: { value: 35, density: { enable: true, area: 800 } },
+      color: { value: "#38bdf8" }, // neon cyan
+      shape: { type: "square" },
+      opacity: { value: 0.75, random: { enable: true, minimumValue: 0.4 } },
+      size: { value: { min: 3, max: 6 } },
+      rotate: {
+        value: 45,
+        random: true,
+        animation: { enable: true, speed: 4, sync: false }
+      },
+      move: {
+        enable: true,
+        speed: 0.6,
+        direction: "none",
+        random: true,
+        straight: false,
+        outModes: { default: "out" }
+      },
+      // "shadow" creates a soft glow around each particle
+      shadow: { enable: true, color: "#38bdf8", blur: 12 }
+    },
+    interactivity: {
+      events: {
+        onHover: { enable: true, mode: "repulse" },
+        onClick: { enable: true, mode: "push" },
+        resize: true
+      },
+      modes: {
+        repulse: { distance: 100, duration: 0.4 },
+        push: { quantity: 2 }
+      }
+    },
+    // fewer particles on small screens for performance
+    responsive: [
+      { maxWidth: 640, options: { particles: { number: { value: 18 } } } }
+    ]
+  };
+
+  return <Particles id="tsparticles" init={particlesInit} options={options} />;
+};
 
 // --- Helper: Animated Section wrapper ---
 const Section = ({ id, children }) => (
@@ -228,7 +285,10 @@ const Footer = () => (
 export default function App(){
   return (
     <div className="min-h-screen text-white font-sans" style={{backgroundColor: '#0a0a0a'}}>
-      <nav className="py-4 border-b border-gray-900">
+      {/* animated bits background (particles use fullScreen with zIndex -1 so content sits above) */}
+      <BitsBackground />
+
+      <nav className="py-4 border-b border-gray-900 relative z-10">
         <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
           <div className="text-xl font-bold text-white">Ariel<span className="text-sky-300">.</span></div>
           <div className="hidden md:flex gap-6 text-gray-300">
@@ -240,7 +300,7 @@ export default function App(){
         </div>
       </nav>
 
-      <main>
+      <main className="relative z-10">
         <Hero />
         <About />
         <Skills />
