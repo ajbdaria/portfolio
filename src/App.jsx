@@ -4,6 +4,7 @@ import { loadSlim } from "@tsparticles/slim";
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 
+
 // -------------------------
 // BitsBackground component
 // -------------------------
@@ -76,71 +77,87 @@ const Section = ({ id, children }) => (
 // --- Hero Component ---
 const Hero = () => {
   return (
-    <header className="min-h-screen flex items-center" style={{background: 'linear-gradient(180deg, rgba(8,10,13,0.9) 0%, rgba(8,10,13,0.85) 50%, rgba(56,189,248,0.03) 100%)'}}>
-      <div className="container mx-auto px-6">
-        <div className="row align-items-center">
-          <div className="col-md-7">
-            <motion.h1
-              initial={{ x: -40, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.1, duration: 0.7 }}
-              className="text-5xl md:text-6xl font-extrabold text-white leading-tight"
-            >
-              Ariel John Bañadera Daria
-            </motion.h1>
+    <header
+      className="relative min-h-screen flex items-center justify-center text-center"
+      style={{
+        background:
+          'linear-gradient(180deg, rgba(8,10,13,0.95) 0%, rgba(8,10,13,0.9) 50%, rgba(56,189,248,0.05) 100%)',
+      }}
+    >
+      <div className="relative z-10 px-6 flex flex-col items-center">
+        {/* Name */}
+        <motion.h1
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.1, duration: 0.8 }}
+          className="relative text-6xl md:text-8xl font-extrabold text-white drop-shadow-2xl leading-tight"
+        >
+          Ariel John Daria
+        </motion.h1>
 
-            <motion.p
-              initial={{ x: -20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.25, duration: 0.6 }}
-              className="mt-6 text-lg text-gray-200 max-w-xl"
-            >
-              BS Information Systems student & aspiring Web Developer — crafting modern, accessible web experiences with a Web5-inspired aesthetic. Placeholder content for now; achievements and projects coming soon.
-            </motion.p>
+        {/* Overlapping Image */}
+        <motion.div
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{
+            scale: 1,
+            opacity: 1,
+            y: [0, -12, 0], // floating animation
+          }}
+          transition={{
+            delay: 0.3,
+            duration: 3,
+            repeat: Infinity,
+            repeatType: 'loop',
+            ease: 'easeInOut',
+          }}
+          className="relative -mt-24 md:-mt-32 w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-sky-400 shadow-2xl z-20"
+        >
+          <img
+            src="/images/img_1.jpg"
+            alt="Ariel John Bañadera Daria"
+            className="w-full h-full object-cover"
+          />
+        </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-              className="mt-8 flex gap-4"
-            >
-              <a href="#projects" className="btn btn-primary px-5 py-3 rounded-full shadow-lg" style={{background: 'linear-gradient(90deg, #06b6d4, #38bdf8)'}}>
-                View Projects
-              </a>
-              <a href="#contact" className="btn btn-outline-light px-5 py-3 rounded-full">
-                Contact Me
-              </a>
-            </motion.div>
+        {/* Subtitle */}
+        <motion.p
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.6, duration: 0.7 }}
+          className="mt-6 text-lg md:text-xl text-gray-300 max-w-2xl"
+        >
+          BS Information Systems student & aspiring Web Developer — crafting
+          modern, accessible web experiences with style.
+        </motion.p>
 
-            <motion.div className="mt-8 flex items-center gap-4 text-gray-300">
-              <FaGithub size={22} />
-              <FaLinkedin size={22} />
-              <FaEnvelope size={22} />
-            </motion.div>
-          </div>
-
-          <div className="col-md-5 hidden md:block">
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="w-full h-80 rounded-2xl overflow-hidden shadow-2xl border border-gray-800"
-              style={{background: 'linear-gradient(135deg, rgba(56,189,248,0.12), rgba(255,255,255,0.02))'}}
-            >
-              {/* Placeholder visual — replace with your image/illustration */}
-              <div className="w-full h-full flex items-center justify-center text-sky-300">
-                <svg width="220" height="220" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="1" y="1" width="22" height="22" rx="6" stroke="#38bdf8" strokeWidth="0.8" fill="rgba(56,189,248,0.04)" />
-                  <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fontSize="10" fill="#9be7ff">Placeholder</text>
-                </svg>
-              </div>
-            </motion.div>
-          </div>
-        </div>
+        {/* Buttons */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8 }}
+          className="mt-8 flex flex-wrap justify-center gap-4"
+        >
+          <a
+            href="#projects"
+            className="px-6 py-3 rounded-full shadow-lg text-white font-medium"
+            style={{
+              background: 'linear-gradient(90deg, #06b6d4, #38bdf8)',
+            }}
+          >
+            View Projects
+          </a>
+          <a
+            href="#contact"
+            className="px-6 py-3 rounded-full border border-gray-400 text-gray-200 hover:bg-white hover:text-black transition"
+          >
+            Contact Me
+          </a>
+        </motion.div>
       </div>
     </header>
   );
 };
+
 
 // --- About Component ---
 const About = () => (
